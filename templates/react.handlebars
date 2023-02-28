@@ -1,0 +1,36 @@
+/* tslint:disable */
+/* eslint-disable */
+import React, { CSSProperties, SVGAttributes, FunctionComponent } from 'react';
+
+interface Props extends Omit<SVGAttributes<SVGElement>, 'color'> {
+  size?: number;
+  color?: string | string[];
+}
+
+const DEFAULT_STYLE: CSSProperties = {
+  display: 'block',
+};
+
+const Icon{{name}}: FunctionComponent<Props> = ({ size, color, style: _style, ...rest }) => {
+  const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
+  const colors = Array.isArray(color) ? color : [{{#each path}} color, {{/each}}];
+
+  return (
+    <svg viewBox="{{viewBox}}" width={size + 'px'} height={size + 'px'} style={style} {...rest}>
+      {{#each path}}
+          <path fill={`${colors[{{@index}}] || '{{this.fill}}'}`}
+                d='{{this.d}}'
+                {{#each this.extra}}
+                {{@key}}="{{this}}"
+                {{/each}}
+          ></path>
+      {{/each}}
+    </svg>
+  );
+};
+
+Icon{{name}}.defaultProps = {
+  size: 32,
+};
+
+export default Icon{{name}};

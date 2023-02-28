@@ -1,0 +1,40 @@
+import React, { CSSProperties } from 'react';
+
+import { View } from '@tarojs/components';
+import { getSystemInfoSync } from '@tarojs/taro';
+
+interface Props {
+  size?: number;
+  color?: string | string[];
+  style?: CSSProperties;
+}
+
+export const Icon{{name}}: React.FC<Props> = ({ size: _size = 32, color = '', style }) => {
+
+  const colors = Array.isArray(color) ? color : [{{#each path}} color, {{/each}}];
+  const size =  (_size / 750) * getSystemInfoSync().windowWidth;
+
+  const base64 = encodeURIComponent(`<svg viewBox='{{viewBox}}'  xmlns='http://www.w3.org/2000/svg' >
+    {{#each path}}
+        <path fill='${colors[{{@index}}] || '{{this.fill}}'}'
+              d='{{this.d}}'
+              {{#each this.extra}}
+                {{@key}}="{{this}}"
+              {{/each}}
+        ></path>
+    {{/each}}
+   </svg>`);
+
+  return (
+    <View
+      style=\{{
+        width: size + 'px',
+        height: size + 'px',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url("data:image/svg+xml,${base64}")`,
+        ...style
+      }}
+    />
+  );
+};
+

@@ -1,0 +1,3 @@
+```
+pnpm install @smashjs/iconx
+```
