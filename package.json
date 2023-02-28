@@ -24,13 +24,13 @@
       ]
     }
   },
+  "bin": {
+    "iconx": "./bin/iconx.mjs"
+  },
   "files": [
     "dist",
     "templates"
   ],
-  "bin": {
-    "iconx": "./bin/iconx.mjs"
-  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
@@ -85,5 +85,8 @@
     "unbuild": "^0.9.4",
     "vitest": "^0.24.3"
   },
-  "packageManager": "pnpm@6.32.3"
+  "packageManager": "pnpm@6.32.3",
+  "publishConfig": {
+    "access": "public"
+  }
 }
